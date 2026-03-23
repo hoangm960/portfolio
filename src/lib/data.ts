@@ -34,10 +34,10 @@ export const projects = [
     },
     {
         id: 2,
-        name: "Fire Detection & Extinguishment System",
+        name: "Smart Fire Safety and Environmental Monitoring System",
         description:
             "Engineered a real-time fire safety system on an ESP32 microcontroller, utilizing FreeRTOS to manage concurrent sensor monitoring and automated suppression tasks. Synchronized critical mechanisms by deploying semaphores, preventing race conditions between environmental data acquisition and immediate actuator deployment.",
-        image: "",
+        image: "/projects/fire_alarm.png",
         techStack: ["C++", "FreeRTOS", "ESP32"],
         githubUrl:
             "https://github.com/hoangminh2901/midterm-embeded/tree/RTOS_Project",
@@ -60,7 +60,7 @@ export const projects = [
         name: "EQ Hand",
         description:
             "Led a team of 3 developers in architecting a real-time, hand-controlled audio application that maps multi-hand spatial gestures to dynamic volume and frequency adjustments. Implemented a state-machine driven control flow to manage complex initialization sequences, gesture locks, and seamless mode transitions.",
-        image: "",
+        image: "/projects/eq_hand.png",
         techStack: ["Python", "FFmpeg", "pydub", "Computer Vision"],
         githubUrl: "https://github.com/hoangminh2901/eq-hand",
         liveUrl: "",
@@ -71,7 +71,7 @@ export const projects = [
         name: "Trivia Scoring",
         description:
             "Built a full-stack scoring system used in live events (~20+ participants per session). Reduced manual scoring time from ~10 minutes to under 30 seconds per round. Designed real-time data flow between frontend and backend for rapid score updates.",
-        image: "",
+        image: "/projects/trivia_scoring.jpg",
         techStack: ["React", "Express.js", "Firebase"],
         githubUrl: "https://github.com/hoangm960/trivia_scoring",
         liveUrl: "",
@@ -82,7 +82,7 @@ export const projects = [
         name: "Terminal Emulator",
         description:
             "Built a cross-platform terminal emulator from scratch in C, implementing a high-performance, non-blocking rendering loop. Resolved complex UTF-8 and double-width character rendering constraints. Final project for Operating System class.",
-        image: "",
+        image: "/projects/terminal.jpg",
         techStack: ["C"],
         githubUrl: "https://github.com/hoangminh2901/terminal-emulator",
         liveUrl: "",
@@ -93,7 +93,7 @@ export const projects = [
         name: "S.E.A",
         description:
             "A desktop application for monitoring renewable energy from the ocean. Set up remote server infrastructure for database storing energy production measurements. Won second place in Hue's Engineering and Science Fair.",
-        image: "",
+        image: "/projects/sea.jpg",
         techStack: ["Flutter", "Windows Server"],
         githubUrl: "https://github.com/hoangm960/Station_energy_automatic",
         liveUrl: "",
@@ -104,7 +104,7 @@ export const projects = [
         name: "Astrea",
         description:
             "Developed a desktop application for teaching programming concepts to students. Led a 3-member team to deliver a working product for live demo. Awarded 3rd Prize at Hue Science & Engineering Fair.",
-        image: "",
+        image: "/projects/astrea.jpg",
         techStack: ["Python", "PyQt5"],
         githubUrl: "https://github.com/hoangm960/Astraea",
         liveUrl: "",
