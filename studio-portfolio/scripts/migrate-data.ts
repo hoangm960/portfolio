@@ -5,7 +5,7 @@ import path from 'path'
 dotenv.config({ path: path.resolve(__dirname, '..', '.env') })
 
 import { createClient } from '@sanity/client'
-import { personalInfo, projects, skillCategories, socialLinks, type Skill, type SkillCategory } from '../../src/lib/data'
+import { personalInfo, projects, skillCategories, type Skill, type SkillCategory } from '../../src/lib/data'
 
 type SkillCategoryType = SkillCategory & { skills: Skill[] }
 
@@ -64,7 +64,7 @@ async function migrate() {
         liveUrl: project.liveUrl || null,
         period: project.period,
       }
-      const result = await client.create(projectDoc)
+      await client.create(projectDoc)
       console.log('   ✓ Created:', project.name)
       projectsCreated++
     } else {
@@ -90,7 +90,7 @@ async function migrate() {
           icon: skill.icon,
         })),
       }
-      const result = await client.create(categoryDoc)
+      await client.create(categoryDoc)
       console.log('   ✓ Created:', category.name)
       categoriesCreated++
     } else {
@@ -118,7 +118,7 @@ async function migrate() {
         url: social.url,
         enabled: true,
       }
-      const result = await client.create(socialDoc)
+      await client.create(socialDoc)
       console.log('   ✓ Created:', social.platform)
       socialsCreated++
     } else {
