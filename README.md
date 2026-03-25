@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
+
+Personal portfolio website built with modern web technologies to showcase my projects, skills, and experience as a Full-stack Developer.
+
+## Technologies
+
+- **Frontend**: React, Next.js, TypeScript, TailwindCSS, Framer Motion, Three.js
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB, Firebase, PostgreSQL, MySQL
+- **CMS**: Sanity
+- **Tools**: Git, Vite, Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Frontend
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### CMS Content Management
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This portfolio uses **Sanity** as a headless CMS. You can modify content without touching code.
 
-## Learn More
+#### Run Sanity Studio locally
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd studio-portfolio
+npm install
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then open [http://localhost:3333](http://localhost:3333) in your browser.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Content you can modify
 
-## Deploy on Vercel
+- **Personal Info** — name, role, bio, avatar, location, contact details
+- **Projects** — title, description, tech stack, GitHub/live URLs, dates
+- **Skills** — categories and individual skills with icons
+- **Social Links** — GitHub, LinkedIn, Facebook, email
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Environment Variables
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Frontend (`.env.local`)
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+```
+
+### Sanity Studio (`studio-portfolio/.env`)
+
+Copy from `studio-portfolio/.env.example`:
+
+```env
+SANITY_PROJECT_ID=your_project_id
+SANITY_DATASET=production
+SANITY_WRITE_TOKEN=your_write_token
+```

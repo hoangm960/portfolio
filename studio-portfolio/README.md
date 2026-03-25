@@ -1,9 +1,32 @@
-# Sanity Clean Content Studio
+# Sanity CMS for Portfolio
 
-Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
+This is the Sanity Content Studio for managing portfolio content.
 
-Now you can do the following things:
+## Getting Started
 
-- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
-- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
-- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3333](http://localhost:3333) to manage content.
+
+## Content Types
+
+- **personalInfo** — Your profile information (name, role, bio, avatar, contact)
+- **project** — Portfolio projects with description, tech stack, and links
+- **skillCategory** — Skill categories and individual skills
+- **socialLink** — Social media links (GitHub, LinkedIn, Facebook, email)
+
+## Environment Variables
+
+Copy `.env.example` to `.env` and add your values:
+
+```bash
+cp .env.example .env
+```
+
+Required variables:
+- `SANITY_PROJECT_ID` — Your Sanity project ID
+- `SANITY_DATASET` — Dataset name (default: production)
+- `SANITY_WRITE_TOKEN` — Write token for content modifications
