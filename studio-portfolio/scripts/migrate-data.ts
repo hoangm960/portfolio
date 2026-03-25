@@ -62,7 +62,8 @@ async function migrate() {
         techStack: project.techStack,
         githubUrl: project.githubUrl,
         liveUrl: project.liveUrl || null,
-        period: project.period,
+        startDate: project.startDate,
+        endDate: project.endDate || null,
       }
       await client.create(projectDoc)
       console.log('   ✓ Created:', project.name)
