@@ -43,13 +43,11 @@ export function Hero() {
                 </Canvas>
 
                 <div
-                    className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-700 ${
+                    className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-400 ${
                         scrollProgress > 0.6 ? "opacity-100" : "opacity-0"
                     }`}
                 >
-                    <div className="pointer-events-auto">
-                        <HeroContent />
-                    </div>
+                    <HeroContent />
                 </div>
             </div>
         </section>
