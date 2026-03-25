@@ -43,8 +43,8 @@ export function Hero() {
                 </Canvas>
 
                 <div
-                    className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-opacity duration-400 ${
-                        scrollProgress > 0.6 ? "opacity-100" : "opacity-0"
+                    className={`absolute inset-0 flex items-center justify-center transition-opacity duration-400 ${
+                        scrollProgress > 0.6 ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
                     }`}
                 >
                     <HeroContent />
