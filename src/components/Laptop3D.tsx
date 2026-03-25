@@ -12,7 +12,8 @@ interface Laptop3DProps {
 export function Laptop3D({ scrollProgress }: Laptop3DProps) {
     const { height } = useThree((state) => state.viewport);
 
-    const gltf = useGLTF("/asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb");
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    const gltf = useGLTF(`${basePath}/asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb`);
     const nodes = gltf.nodes as unknown as Record<string, THREE.Mesh>;
     const materials = gltf.materials as unknown as Record<
         string,
@@ -469,4 +470,4 @@ export function Laptop3D({ scrollProgress }: Laptop3DProps) {
     );
 }
 
-useGLTF.preload("/asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb");
+useGLTF.preload(`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/asus_rog_strix_scar_17_2023_g733_gaming_laptop.glb`);
