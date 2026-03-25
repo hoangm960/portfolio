@@ -1,5 +1,5 @@
 import { createClient } from '@sanity/client'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import { personalInfo as defaultPersonalInfo, projects as defaultProjects, skillCategories as defaultSkillCategories, socialLinks as defaultSocialLinks } from './data'
 
 export const client = createClient({
@@ -9,10 +9,17 @@ export const client = createClient({
   useCdn: false,
 })
 
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
-export function urlFor(source: any) {
-  if (!source) return { url: () => "" }
+type SanityImage = {
+  _type?: string;
+  asset?: {
+    _ref: string;
+  };
+};
+
+export function urlFor(source: SanityImage | null | undefined) {
+  if (!source || !source.asset) return { url: () => "" }
   return builder.image(source)
 }
 
@@ -45,9 +52,14 @@ export async function getSkillCategories() {
 
 export async function getSocialLinks() {
   try {
-    const data = await client.fetch(`*[_type == "socialLink"][0]`)
-    return data || defaultSocialLinks
+    const data = await client.fetch(`*[_type == "socialLink" && enabled == true]`)
+    return data?.length > 0 ? data : defaultSocialLinks
   } catch {
-    return defaultSocialLinks
+    // Return as array format
+    return [
+      { platform: "github", url: "https://github.com/hoangm960", enabled: true },
+      { platform: "linkedin", url: "https://linkedin.com/in/minh-hoang-tech", enabled: true },
+      { platform: "facebook", url: "https://www.facebook.com/daylaminhne2901", enabled: true },
+    ]
   }
 }

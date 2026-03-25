@@ -6,12 +6,23 @@ import { Environment } from "@react-three/drei";
 import { Laptop3D } from "./Laptop3D";
 import { HeroContent } from "./HeroContent";
 
-type HeroProps = {
-  personalInfo: any;
-  socialLinks: any;
+type HeroAvatar = {
+  _type?: string;
+  asset?: {
+    _ref: string;
+  };
 };
 
-export function Hero({ personalInfo, socialLinks }: HeroProps) {
+type HeroProps = {
+  personalInfo: {
+    name?: string;
+    avatar?: HeroAvatar | string | null;
+    role?: string;
+    tagline?: string;
+  } | null;
+};
+
+export function Hero({ personalInfo }: HeroProps) {
     const [scrollProgress, setScrollProgress] = useState(0);
 
     useEffect(() => {

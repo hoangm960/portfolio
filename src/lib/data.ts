@@ -239,8 +239,8 @@ export const skillFallbacks: Record<string, { bg: string; text: string }> = {
     },
 };
 
-export const socialLinks = {
-    github: "https://github.com/hoangm960",
-    linkedin: "https://linkedin.com/in/minh-hoang-tech",
-    facebook: "https://www.facebook.com/daylaminhne2901",
-};
+export const socialLinks = [
+    { platform: "github", url: "https://github.com/hoangm960", enabled: true },
+    { platform: "linkedin", url: "https://linkedin.com/in/minh-hoang-tech", enabled: true },
+    { platform: "facebook", url: "https://www.facebook.com/daylaminhne2901", enabled: true },
+];

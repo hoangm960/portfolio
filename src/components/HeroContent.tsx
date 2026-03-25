@@ -5,14 +5,27 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { urlFor } from "@/lib/sanity";
 
+type HeroAvatar = {
+  _type?: string;
+  asset?: {
+    _ref: string;
+  };
+};
+
 type HeroContentProps = {
-  personalInfo: any;
+  personalInfo: {
+    name?: string;
+    avatar?: HeroAvatar | string | null;
+    role?: string;
+    tagline?: string;
+  } | null;
 };
 
 export function HeroContent({ personalInfo }: HeroContentProps) {
-  const avatarUrl = personalInfo?.avatar 
-    ? (personalInfo.avatar._type === 'image' ? urlFor(personalInfo.avatar).url() : personalInfo.avatar)
-    : "";
+  const avatar = personalInfo?.avatar;
+  const avatarUrl = typeof avatar === 'object' && avatar !== null
+    ? urlFor(avatar).url()
+    : (typeof avatar === 'string' ? avatar : "");
     return (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center text-center">
             <motion.div
@@ -55,7 +68,7 @@ export function HeroContent({ personalInfo }: HeroContentProps) {
                     👋
                 </motion.span>
                 , I&apos;m{" "}
-                <span className="text-sky-500">{personalInfo.name}</span>
+                <span className="text-sky-500">{personalInfo?.name}</span>
             </motion.h1>
 
             <motion.h2
@@ -64,7 +77,7 @@ export function HeroContent({ personalInfo }: HeroContentProps) {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-xl sm:text-2xl font-semibold text-slate-600 dark:text-slate-300 mb-6"
             >
-                {personalInfo.role}
+                {personalInfo?.role}
             </motion.h2>
 
             <motion.p
@@ -73,7 +86,7 @@ export function HeroContent({ personalInfo }: HeroContentProps) {
                 transition={{ duration: 0.5, delay: 0.3 }}
                 className="max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed"
             >
-                {personalInfo.tagline}
+                {personalInfo?.tagline}
             </motion.p>
 
             <motion.div

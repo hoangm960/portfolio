@@ -1,28 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-    Mail,
-    Send,
-    MapPin,
-} from "lucide-react";
+import { Mail, Send, MapPin } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
 import { useState } from "react";
 
+type SocialLinkType = {
+    platform: string;
+    url: string;
+    enabled: boolean;
+};
+
 type ContactProps = {
-  personalInfo: any;
-  socialLinks: any;
+    personalInfo: {
+        email?: string;
+        location?: string;
+    } | null;
+    socialLinks: SocialLinkType[] | null;
 };
 
 export function Contact({ personalInfo, socialLinks }: ContactProps) {
-  const email = personalInfo?.email || "";
-  const location = personalInfo?.location || "";
+    const email = personalInfo?.email || "";
+    const location = personalInfo?.location || "";
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
         "idle",
     );
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus("sending");
         await new Promise((r) => setTimeout(r, 1500));
@@ -31,12 +36,41 @@ export function Contact({ personalInfo, socialLinks }: ContactProps) {
         setTimeout(() => setStatus("idle"), 3000);
     };
 
-    const socials = [
-        { icon: "fa-brands:github", href: socialLinks?.github, label: "GitHub" },
-        { icon: "fa-brands:linkedin", href: socialLinks?.linkedin, label: "LinkedIn" },
-        { icon: "fa-brands:facebook", href: socialLinks?.facebook, label: "Facebook" },
-        { icon: "fa-solid:envelope", href: `mailto:${email}`, label: "Email" },
-    ];
+    const platformIcons: Record<string, string> = {
+        github: "fa-brands:github",
+        linkedin: "fa-brands:linkedin",
+        facebook: "fa-brands:facebook",
+        twitter: "fa-brands:twitter",
+        instagram: "fa-brands:instagram",
+        youtube: "fa-brands:youtube",
+        email: "fa-solid:envelope",
+    };
+
+    const getSocials = () => {
+        const links: { icon: string; href: string; label: string }[] = [];
+
+        if (Array.isArray(socialLinks)) {
+            socialLinks.forEach((link: SocialLinkType) => {
+                if (link.platform === "email") {
+                    links.push({
+                        icon: "fa-solid:envelope",
+                        href: `mailto:${link.url}`,
+                        label: "Email",
+                    });
+                } else {
+                    links.push({
+                        icon: platformIcons[link.platform] || "fa-solid:link",
+                        href: link.url,
+                        label: link.platform,
+                    });
+                }
+            });
+        }
+
+        return links;
+    };
+
+    const socials = getSocials();
 
     return (
         <section

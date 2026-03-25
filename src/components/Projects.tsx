@@ -6,18 +6,23 @@ import { ExternalLink } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
 import { urlFor } from "@/lib/sanity";
 
+type ProjectImage = {
+  _type: 'image';
+  asset: {
+    _ref: string;
+  };
+};
+
 type Project = {
   _id: string;
   name: string;
   description: string;
-  image: any;
+  image: ProjectImage | string | null;
   techStack: string[];
   githubUrl: string;
   liveUrl: string;
   period: string;
 };
-
-const getProjectId = (project: Project) => project._id || project.name;
 
 type ProjectsProps = {
   projects: Project[];
@@ -95,7 +100,7 @@ export function Projects({ projects }: ProjectsProps) {
                                 {project.image ? (
                                     <>
                                         <Image
-                                            src={project.image._type === 'image' ? urlFor(project.image).url() : project.image}
+                                            src={typeof project.image === 'object' && 'asset' in project.image ? urlFor(project.image).url() : project.image}
                                             alt={project.name}
                                             fill
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"

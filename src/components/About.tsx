@@ -5,14 +5,34 @@ import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { urlFor } from "@/lib/sanity";
 
+type Stats = {
+  yearsExperience: number;
+  projectsCompleted: number;
+  cupsOfCoffee: number;
+};
+
+type AboutImage = {
+  _type?: string;
+  asset?: {
+    _ref: string;
+  };
+};
+
 type AboutProps = {
-  personalInfo: any;
+  personalInfo: {
+    name?: string;
+    aboutImage?: AboutImage | string | null;
+    bio?: string;
+    location?: string;
+    stats?: Stats;
+  } | null;
 };
 
 export function About({ personalInfo }: AboutProps) {
-  const aboutImageUrl = personalInfo?.aboutImage 
-    ? (personalInfo.aboutImage._type === 'image' ? urlFor(personalInfo.aboutImage).url() : personalInfo.aboutImage)
-    : "";
+  const aboutImage = personalInfo?.aboutImage;
+  const aboutImageUrl = typeof aboutImage === 'object' && aboutImage !== null
+    ? urlFor(aboutImage).url()
+    : (typeof aboutImage === 'string' ? aboutImage : "");
   const bio = personalInfo?.bio || "";
   const location = personalInfo?.location || "";
   const stats = personalInfo?.stats || { yearsExperience: 0, projectsCompleted: 0, cupsOfCoffee: 0 };
