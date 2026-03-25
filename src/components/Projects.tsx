@@ -21,8 +21,20 @@ type Project = {
   techStack: string[];
   githubUrl: string;
   liveUrl: string;
-  period: string;
+  startDate: string;
+  endDate?: string;
 };
+
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
+function formatDate(dateStr: string): string {
+  if (dateStr === "present") return "Present";
+  const [year, month] = dateStr.split("-");
+  return `${monthNames[parseInt(month, 10) - 1]} ${year}`;
+}
 
 type ProjectsProps = {
   projects: Project[];
@@ -126,11 +138,9 @@ export function Projects({ projects }: ProjectsProps) {
                                             {project.name}
                                         </h3>
                                     </div>
-                                    {project.period && (
-                                        <p className="text-xs text-slate-400 dark:text-slate-500 mb-3">
-                                            {project.period}
-                                        </p>
-                                    )}
+                                    <p className="text-xs text-slate-400 dark:text-slate-500 mb-3">
+                                        {formatDate(project.startDate)} – {formatDate(project.endDate || "")}
+                                    </p>
                                 </div>
 
                                 <div>

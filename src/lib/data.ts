@@ -26,7 +26,8 @@ export const projects = [
         techStack: ["React", "TypeScript", "Vite", "Rough.js", "rbush"],
         githubUrl: "https://github.com/hoangm960/drawft",
         liveUrl: "https://hoangm960.github.io/drawft/",
-        period: "June 2025 – Present",
+        startDate: "2025-06",
+        endDate: "present",
     },
     {
         id: 1,
@@ -45,7 +46,8 @@ export const projects = [
         ],
         githubUrl: "https://github.com/hoangm960/final-embeded/",
         liveUrl: "",
-        period: "November 2025 – December 2025",
+        startDate: "2025-11",
+        endDate: "2025-12",
     },
     {
         id: 2,
@@ -57,7 +59,8 @@ export const projects = [
         githubUrl:
             "https://github.com/hoangminh2901/midterm-embeded/tree/RTOS_Project",
         liveUrl: "",
-        period: "October – November 2025",
+        startDate: "2025-10",
+        endDate: "2025-11",
     },
     {
         id: 3,
@@ -68,7 +71,8 @@ export const projects = [
         techStack: ["ANTLR4", "Python"],
         githubUrl: "https://github.com/hoangminh2901/onion-lang",
         liveUrl: "",
-        period: "April – May 2025",
+        startDate: "2025-04",
+        endDate: "2025-05",
     },
     {
         id: 4,
@@ -79,7 +83,8 @@ export const projects = [
         techStack: ["Python", "FFmpeg", "pydub", "Computer Vision"],
         githubUrl: "https://github.com/hoangminh2901/eq-hand",
         liveUrl: "",
-        period: "April – May 2025",
+        startDate: "2025-04",
+        endDate: "2025-05",
     },
     {
         id: 5,
@@ -90,7 +95,8 @@ export const projects = [
         techStack: ["React", "Express.js", "Firebase"],
         githubUrl: "https://github.com/hoangm960/trivia_scoring",
         liveUrl: "https://trivia-scoring.web.app",
-        period: "February 2024 – April 2025",
+        startDate: "2024-02",
+        endDate: "2025-04",
     },
     {
         id: 6,
@@ -101,7 +107,8 @@ export const projects = [
         techStack: ["C"],
         githubUrl: "https://github.com/hoangminh2901/terminal-emulator",
         liveUrl: "",
-        period: "November – December 2024",
+        startDate: "2024-11",
+        endDate: "2024-12",
     },
     {
         id: 7,
@@ -112,7 +119,8 @@ export const projects = [
         techStack: ["Flutter", "Windows Server"],
         githubUrl: "https://github.com/hoangm960/Station_energy_automatic",
         liveUrl: "",
-        period: "November 2021 – March 2022",
+        startDate: "2021-11",
+        endDate: "2022-03",
     },
     {
         id: 8,
@@ -123,7 +131,8 @@ export const projects = [
         techStack: ["Python", "PyQt5"],
         githubUrl: "https://github.com/hoangm960/Astraea",
         liveUrl: "",
-        period: "September 2020 – December 2021",
+        startDate: "2020-09",
+        endDate: "2021-12",
     },
 ];
 
