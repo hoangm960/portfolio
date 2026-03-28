@@ -52,8 +52,54 @@ export function PersonalInfoForm({
         setSaving(false);
     }
 
+    const avatarPreview = avatarFile ? URL.createObjectURL(avatarFile) : form.avatar;
+    const aboutPreview = aboutFile ? URL.createObjectURL(aboutFile) : form.aboutImage;
+
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl">
+            <div className="flex flex-row justify-between items-start gap-6 p-4 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-lg">
+                <div className="flex-1">
+                    <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Avatar</label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setAvatarFile(e.target.files?.[0] || null)}
+                        className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100 dark:file:bg-sky-900 dark:file:text-sky-300"
+                    />
+                    {avatarPreview && (
+                        <div className="relative mt-2 w-20 h-20">
+                            <Image
+                                src={avatarPreview}
+                                alt="Avatar"
+                                fill
+                                className="object-cover rounded"
+                            />
+                        </div>
+                    )}
+                </div>
+                <div className="flex-1">
+                    <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
+                        About Image
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setAboutFile(e.target.files?.[0] || null)}
+                        className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-sky-50 file:text-sky-700 hover:file:bg-sky-100 dark:file:bg-sky-900 dark:file:text-sky-300"
+                    />
+                    {aboutPreview && (
+                        <div className="relative mt-2 w-20 h-20">
+                            <Image
+                                src={aboutPreview}
+                                alt="About"
+                                fill
+                                className="object-cover rounded"
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
+
             <div>
                 <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Name</label>
                 <input
@@ -183,44 +229,6 @@ export function PersonalInfoForm({
                         className="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
                     />
                 </div>
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">Avatar</label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setAvatarFile(e.target.files?.[0] || null)}
-                    className="block w-full"
-                />
-                {form.avatar && (
-                    <Image
-                        src={form.avatar}
-                        alt="Avatar"
-                        width={80}
-                        height={80}
-                        className="mt-2 object-cover rounded"
-                    />
-                )}
-            </div>
-            <div>
-                <label className="block text-sm font-medium mb-1 text-slate-700 dark:text-slate-300">
-                    About Image
-                </label>
-                <input
-                    type="file"
-                    accept="image/*"
-                    onChange={(e) => setAboutFile(e.target.files?.[0] || null)}
-                    className="block w-full"
-                />
-                {form.aboutImage && (
-                    <Image
-                        src={form.aboutImage}
-                        alt="About"
-                        width={80}
-                        height={80}
-                        className="mt-2 object-cover rounded"
-                    />
-                )}
             </div>
             <button
                 type="submit"
