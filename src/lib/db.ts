@@ -14,6 +14,8 @@ import { db, storage } from "./firebase";
 export type Skill = {
   name: string;
   icon: string | null;
+  bgColor: string | null;
+  textColor: string | null;
 };
 
 export type SkillCategory = {
@@ -56,6 +58,7 @@ export type SkillCategoryInput = {
 
 export type SocialLink = {
   platform: string;
+  title: string;
   url: string;
   enabled: boolean;
   order: number;
@@ -176,4 +179,15 @@ export async function getSocialLinks(): Promise<SocialLink[]> {
 export async function updateSocialLink(platform: string, data: Partial<SocialLink>): Promise<void> {
   const docRef = doc(db, "socialLinks", platform);
   await setDoc(docRef, { platform, ...data }, { merge: true });
+}
+
+export async function createSocialLink(data: { title: string; url: string; order: number }): Promise<string> {
+  const docRef = doc(collection(db, "socialLinks"));
+  await setDoc(docRef, { platform: docRef.id, title: data.title, url: data.url, enabled: true, order: data.order });
+  return docRef.id;
+}
+
+export async function deleteSocialLink(platform: string): Promise<void> {
+  const docRef = doc(db, "socialLinks", platform);
+  await deleteDoc(docRef);
 }
