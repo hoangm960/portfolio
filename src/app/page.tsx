@@ -3,7 +3,7 @@ import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
 import { Skills } from "@/components/Skills";
 import { Contact } from "@/components/Contact";
-import { getPersonalInfo, getProjects, getSkillCategories, getSocialLinks } from "@/lib/sanity";
+import { getPersonalInfo, getProjects, getSkillCategories, getSocialLinks } from "@/lib/db";
 
 export default async function Home() {
   const [personalInfo, projects, skillCategories, socialLinks] = await Promise.all([

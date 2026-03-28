@@ -4,20 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 import { SocialIcon } from "@/components/SocialIcon";
-import { urlFor } from "@/lib/sanity";
-
-type ProjectImage = {
-  _type: 'image';
-  asset: {
-    _ref: string;
-  };
-};
 
 type Project = {
   _id: string;
   name: string;
   description: string;
-  image: ProjectImage | string | null;
+  image: string | null;
   techStack: string[];
   githubUrl: string;
   liveUrl: string;
@@ -112,7 +104,7 @@ export function Projects({ projects }: ProjectsProps) {
                                 {project.image ? (
                                     <>
                                         <Image
-                                            src={typeof project.image === 'object' && 'asset' in project.image ? urlFor(project.image).url() : project.image}
+                                            src={project.image}
                                             alt={project.name}
                                             fill
                                             className="object-cover group-hover:scale-105 transition-transform duration-500"

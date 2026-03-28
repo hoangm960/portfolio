@@ -6,17 +6,10 @@ import { Environment } from "@react-three/drei";
 import { Laptop3D } from "./Laptop3D";
 import { HeroContent } from "./HeroContent";
 
-type HeroAvatar = {
-  _type?: string;
-  asset?: {
-    _ref: string;
-  };
-};
-
 type HeroProps = {
   personalInfo: {
     name?: string;
-    avatar?: HeroAvatar | string | null;
+    avatar?: string | null;
     role?: string;
     tagline?: string;
   } | null;

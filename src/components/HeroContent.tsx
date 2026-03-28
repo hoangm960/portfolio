@@ -3,29 +3,18 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { urlFor } from "@/lib/sanity";
-
-type HeroAvatar = {
-  _type?: string;
-  asset?: {
-    _ref: string;
-  };
-};
 
 type HeroContentProps = {
   personalInfo: {
     name?: string;
-    avatar?: HeroAvatar | string | null;
+    avatar?: string | null;
     role?: string;
     tagline?: string;
   } | null;
 };
 
 export function HeroContent({ personalInfo }: HeroContentProps) {
-  const avatar = personalInfo?.avatar;
-  const avatarUrl = typeof avatar === 'object' && avatar !== null
-    ? urlFor(avatar).url()
-    : (typeof avatar === 'string' ? avatar : "");
+  const avatarUrl = personalInfo?.avatar || "";
     return (
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 flex flex-col items-center text-center">
             <motion.div

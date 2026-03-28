@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
-import { urlFor } from "@/lib/sanity";
 
 type Stats = {
   yearsExperience: number;
@@ -11,17 +10,10 @@ type Stats = {
   cupsOfCoffee: number;
 };
 
-type AboutImage = {
-  _type?: string;
-  asset?: {
-    _ref: string;
-  };
-};
-
 type AboutProps = {
   personalInfo: {
     name?: string;
-    aboutImage?: AboutImage | string | null;
+    aboutImage?: string | null;
     bio?: string;
     location?: string;
     stats?: Stats;
@@ -29,10 +21,7 @@ type AboutProps = {
 };
 
 export function About({ personalInfo }: AboutProps) {
-  const aboutImage = personalInfo?.aboutImage;
-  const aboutImageUrl = typeof aboutImage === 'object' && aboutImage !== null
-    ? urlFor(aboutImage).url()
-    : (typeof aboutImage === 'string' ? aboutImage : "");
+  const aboutImageUrl = personalInfo?.aboutImage || "";
   const bio = personalInfo?.bio || "";
   const location = personalInfo?.location || "";
   const stats = personalInfo?.stats || { yearsExperience: 0, projectsCompleted: 0, cupsOfCoffee: 0 };
