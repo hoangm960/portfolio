@@ -2,7 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Icon } from "@iconify/react";
-import { skillFallbacks } from "@/lib/data";
+
+const skillFallbacks: Record<string, { bg: string; text: string }> = {
+    TailwindCSS: {
+        bg: "bg-sky-100 dark:bg-sky-500/20",
+        text: "text-sky-600 dark:text-sky-400",
+    },
+    Flask: {
+        bg: "bg-neutral-100 dark:bg-neutral-500/20",
+        text: "text-neutral-600 dark:text-neutral-300",
+    },
+    ESP32: {
+        bg: "bg-emerald-100 dark:bg-emerald-500/20",
+        text: "text-emerald-600 dark:text-emerald-400",
+    },
+    FreeRTOS: {
+        bg: "bg-red-100 dark:bg-red-500/20",
+        text: "text-red-600 dark:text-red-400",
+    },
+    "Beautiful Soup": {
+        bg: "bg-yellow-100 dark:bg-yellow-500/20",
+        text: "text-yellow-700 dark:text-yellow-400",
+    },
+};
 
 type Skill = {
   name: string;
