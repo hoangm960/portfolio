@@ -10,12 +10,6 @@ import {
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "./firebase";
-import {
-  personalInfo as defaultPersonalInfo,
-  projects as defaultProjects,
-  skillCategories as defaultSkillCategories,
-  socialLinks as defaultSocialLinks,
-} from "./data";
 
 export type Skill = {
   name: string;
@@ -84,7 +78,7 @@ export type PersonalInfo = {
   };
 };
 
-const PERSONAL_INFO_DOC = "personalInfo/main";
+const PERSONAL_INFO_DOC = "info/personal";
 
 async function uploadImage(
   folder: string,
@@ -97,16 +91,12 @@ async function uploadImage(
 }
 
 export async function getPersonalInfo(): Promise<PersonalInfo> {
-  try {
-    const docRef = doc(db, PERSONAL_INFO_DOC);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      return docSnap.data() as PersonalInfo;
-    }
-    return defaultPersonalInfo;
-  } catch {
-    return defaultPersonalInfo;
+  const docRef = doc(db, PERSONAL_INFO_DOC);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data() as PersonalInfo;
   }
+  throw new Error("Personal info not found in Firestore");
 }
 
 export async function updatePersonalInfo(data: Partial<PersonalInfo>): Promise<void> {
@@ -123,29 +113,12 @@ export async function uploadAboutImage(userId: string, file: File): Promise<stri
 }
 
 export async function getProjects(): Promise<Project[]> {
-  try {
-    const q = query(collection(db, "projects"), orderBy("order", "asc"));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      return defaultProjects.map((p, i) => ({
-        ...p,
-        _id: String(p.id),
-        image: p.image || null,
-        order: i,
-      }));
-    }
-    return querySnapshot.docs.map((doc) => {
-      const data = doc.data();
-      return { _id: doc.id, image: data.imageUrl || null, ...data };
-    }) as Project[];
-  } catch {
-    return defaultProjects.map((p, i) => ({
-      ...p,
-      _id: String(p.id),
-      image: p.image || null,
-      order: i,
-    }));
-  }
+  const q = query(collection(db, "projects"), orderBy("order", "asc"));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => {
+    const data = doc.data();
+    return { _id: doc.id, image: data.imageUrl || null, ...data };
+  }) as Project[];
 }
 
 export async function updateProject(id: string, data: Partial<Project>): Promise<void> {
@@ -170,16 +143,9 @@ export async function uploadProjectImage(projectId: string, file: File): Promise
 }
 
 export async function getSkillCategories(): Promise<SkillCategory[]> {
-  try {
-    const q = query(collection(db, "skillCategories"), orderBy("order", "asc"));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      return defaultSkillCategories.map((c, i) => ({ ...c, _id: String(c.id), order: i + 1 }));
-    }
-    return querySnapshot.docs.map((doc) => ({ _id: doc.id, ...doc.data() })) as SkillCategory[];
-  } catch {
-    return defaultSkillCategories.map((c, i) => ({ ...c, _id: String(c.id), order: i + 1 }));
-  }
+  const q = query(collection(db, "skillCategories"), orderBy("order", "asc"));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => ({ _id: doc.id, ...doc.data() })) as SkillCategory[];
 }
 
 export async function updateSkillCategory(
@@ -202,16 +168,9 @@ export async function deleteSkillCategory(id: string): Promise<void> {
 }
 
 export async function getSocialLinks(): Promise<SocialLink[]> {
-  try {
-    const q = query(collection(db, "socialLinks"), orderBy("order", "asc"));
-    const querySnapshot = await getDocs(q);
-    if (querySnapshot.empty) {
-      return defaultSocialLinks.map((s, i) => ({ ...s, order: i }));
-    }
-    return querySnapshot.docs.map((doc) => doc.data()) as SocialLink[];
-  } catch {
-    return defaultSocialLinks.map((s, i) => ({ ...s, order: i }));
-  }
+  const q = query(collection(db, "socialLinks"), orderBy("order", "asc"));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => doc.data()) as SocialLink[];
 }
 
 export async function updateSocialLink(platform: string, data: Partial<SocialLink>): Promise<void> {
